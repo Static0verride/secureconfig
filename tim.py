@@ -56,12 +56,12 @@ for data in current_file.readlines():           # Reads line by line of text
 
     """Push default security configuration"""
     if init_ssh is None and type_con == "Telnet":   # Default ssh parameters accepted
-        print(ip)
+
         telnet_switch.default_ssh()
         telnet_switch.led_on()
         book_keeping.append([mac, ip, serial, 'SSH', 'admin', 'pass'])
-
-    book_keeping.append([mac, ip, serial, 'SSH', 'admin', 'pass'])      # TODO add file change in param
+    else:
+        book_keeping.append([mac, ip, serial, 'SSH', 'admin', 'pass'])      # TODO add file change in param
 
     """Turn on LED of Switch to symbolize Process has started"""
     telnet_switch.close()                       #
@@ -74,7 +74,6 @@ for switch in book_keeping:
             " " + switch[5] + '\n'
     update_file.write(t_str)
 update_file.close()
-
 """Use napalm to secure connect to switch"""
 
 temp_file = open(sec_config, 'r')
